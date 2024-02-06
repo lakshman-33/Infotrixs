@@ -1,0 +1,97 @@
+# Building a Command-Line Word Manipulation Utility with Python and `argparse`
+
+## Introduction
+
+In this document, we will walk through the process of building a command-line utility using Python. The utility will be a simple to maipulate the text in the document like word count, word replace and other actions done in the text. We will utilize the `argparse` module to handle command-line arguments and incorporate error handling to ensure the robustness of the utility.
+
+## Prerequisites
+
+Before you begin, make sure you have the following:
+
+- Python (3.6 or later) installed on your system.
+- Basic understanding of Python .
+
+## Step 1: Setting Up the Project
+programming concepts.
+- Familiarity with the command line and terminal usage
+
+1. Create a new directory for your project:
+
+2. Inside the project directory, create a new Python script file. L
+   
+3. Open script file in your preferred text editor or integrated development environment (IDE).
+
+## Step 2: Importing Required Modules
+
+At the beginning of the script, import the necessary modules:
+
+```python
+import argparse
+import json
+import os
+```
+
+#Step 3:defining word manipulation functions
+
+#create function to count word occurences in the text
+def count_word_occurrences(text, target_word):
+    return text.lower().count(target_word.lower())
+#create function to replace word in the text
+def replace_word(text, old_word, new_word):
+    return text.replace(old_word, new_word)
+
+
+## Step 4: writing main program logic
+#create main function that perfoms main action
+def main():
+#intialize the try block  
+# add the arguments 
+# use if statement pass the arguments  
+    try:
+        parser = argparse.ArgumentParser(description="Word Manipulation Utility")
+        parser.add_argument("input_file", type=argparse.FileType('r'), help="Input text file for manipulation")
+        parser.add_argument("--count", help="Count occurrences of a word in the text")
+        parser.add_argument("--replace", nargs=2, help="Replace occurrences of a word with another word")
+        
+        
+        args = parser.parse_args()
+        with args.input_file as file:
+            input_text = file.read()
+        
+        manipulated_text = input_text
+        
+        if args.count:
+            count = count_word_occurrences(manipulated_text, args.count)
+            print(f"'{args.count}' appears {count} times in the text.")
+        
+        if args.replace:
+            old_word, new_word = args.replace
+            manipulated_text = replace_word(manipulated_text, old_word, new_word)
+        
+        print("Manipulated Text:", manipulated_text)
+#intialize the exception block    
+    except Exception as e:
+        print("An error occurred:", e)
+
+#calling the main function
+if __name__ == "__main__":
+　　　main()
+　　　
+　　　
+#Step 4:  Testing
+
+1. Open a terminal window and navigate to the directory where script file is located.
+
+2.Try out the utility with various commands:
+ python file_name.py  input.txt --replace "hello" "hi"
+
+Python file_name.py input.txt --count "hello" "hi"
+
+
+3. Use the `--help` option to display the usage information:
+
+  python file_name.py --help
+
+## Conclusion
+
+Congratulations! You have successfully built a simple command-line Text Manipulation  utility using Python and the `argparse` module. This utility allows users to manage their  text file to count umber of words repetative and can replace the word they want in the text file by itself from Command line .further you can add more Manipulations for text.
